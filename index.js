@@ -153,14 +153,20 @@ app.post('/create-item', (req, res) => {
   request.end();
 });
 
-// /create-subitem route
+// /create-subitem route - UPDATED to include columnValues
 app.post('/create-subitem', (req, res) => {
-  const { parentItemId, itemName } = req.body;
+  const { parentItemId, itemName, columnValues } = req.body;
   if (!parentItemId || !itemName) return res.status(400).json({ error: 'Missing parentItemId or itemName' });
+
+  const columnValuesStr = JSON.stringify(columnValues || {});
 
   const query = `
     mutation {
-      create_subitem(parent_item_id: ${parentItemId}, item_name: "${itemName.replace(/"/g, '\\"')}") {
+      create_subitem(
+        parent_item_id: ${parentItemId},
+        item_name: "${itemName.replace(/"/g, '\\"')}",
+        column_values: "${columnValuesStr.replace(/"/g, '\\"')}"
+      ) {
         id
       }
     }
