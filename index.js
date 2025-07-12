@@ -11,7 +11,8 @@ const app = express();
 
 const allowedOrigins = [
   'http://localhost:5173',
-  'http://192.168.10.207:5173'
+  'http://192.168.10.207:5173',
+  'https://support-ticket-v1.vercel.app'  // add this line
 ];
 
 app.use(cors({
