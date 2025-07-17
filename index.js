@@ -205,6 +205,11 @@ app.post('/create-subitem', (req, res) => {
   request.end();
 });
 
+// Health check route
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
+
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Backend running on 192.168.10.207:${PORT}`);
 });
